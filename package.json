@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --setupFiles dotenv/config",
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "create-key": "node scripts/create-api-key.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +16,7 @@
   "dependencies": {
     "dotenv": "^18.0.7",
     "express": "^5.3.0",
+    "groq-sdk": "^1.6.0",
     "mongoose": "^9.11.1"
   },
   "devDependencies": {
