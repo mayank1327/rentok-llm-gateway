@@ -57,42 +57,35 @@ npm run create-key -- "My API Key"
 
 Copy and securely store the generated key. It is displayed only once.
 
-### 6. Send a chat completion request
+### 6. Send a Chat Completion Request
 
-**Endpoint**
+**Deployed endpoint**
 
-`POST /v1/chat/completions`
+`POST https://rentok-llm-gateway-vli4.onrender.com/v1/chat/completions`
 
-**Headers**
+**Example request**
 
-```text
-Content-Type: application/json
-x-api-key: YOUR_GATEWAY_API_KEY
+```bash
+curl -X POST "https://rentok-llm-gateway-vli4.onrender.com/v1/chat/completions" \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: YOUR_GATEWAY_API_KEY" \
+  -d '{
+    "model": "openai/gpt-oss-20b",
+    "messages": [
+      {"role": "user", "content": "Hello!"}
+    ]
+  }'
 ```
 
-**Request body**
+Replace `YOUR_GATEWAY_API_KEY` with a valid gateway API key.
 
-```json
-{
-  "model": "openai/gpt-oss-20b",
-  "messages": [
-    {
-      "role": "user",
-      "content": "Hello!"
-    }
-  ]
-}
+**Health check**
+
+`GET https://rentok-llm-gateway-vli4.onrender.com/health`
+
 ```
-
-Replace `YOUR_GATEWAY_API_KEY` with the gateway key created in Step 5.
 
 For local testing, use `http://localhost:3000/v1/chat/completions`.
-
-### 7. Health check
-
-`GET /health`
-
-Local URL: `http://localhost:3000/health`
 
 ## Running Tests
 
