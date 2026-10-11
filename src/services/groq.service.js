@@ -1,4 +1,5 @@
 const Groq = require("groq-sdk");
+const { MAX_OUTPUT_TOKENS } = require("./cost-estimator.service");
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
@@ -11,6 +12,7 @@ async function createChatCompletion({ model, messages }) {
     return await groq.chat.completions.create({
       model,
       messages,
+      max_tokens: MAX_OUTPUT_TOKENS,
     });
   } catch (error) {
     if (error.name === "APIConnectionTimeoutError") {

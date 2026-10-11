@@ -16,6 +16,18 @@ const apiKeySchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    budgetLimit: {
+        type: Number,
+        required: true,
+        min: 0,
+        default: 100,
+    },
+    spentAmount: {
+        type: Number,
+        required: true,
+        min: 0,
+        default: 0,
+    },
   },
   {
     timestamps: true,
