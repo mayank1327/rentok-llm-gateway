@@ -60,10 +60,30 @@ const estimatedCostINR = estimatedCostUSD * usdToInrRate;
   };
 }
 
+function calculateActualCost({ model, inputTokens, outputTokens }) {
+    const costUSD = estimateCostInUSD({
+      model,
+      inputTokens,
+      outputTokens,
+    });
+  
+    const usdToInrRate = Number(process.env.USD_TO_INR_RATE);
+  
+    if (!Number.isFinite(usdToInrRate) || usdToInrRate <= 0) {
+      throw new Error("Invalid USD_TO_INR_RATE configuration");
+    }
+  
+    return {
+      costUSD,
+      costINR: costUSD * usdToInrRate,
+    };
+  }
+
 module.exports = {
   estimateInputTokens,
   estimateCostInUSD,
   estimateRequestCost,
+  calculateActualCost,
   MAX_OUTPUT_TOKENS,
 };
 
